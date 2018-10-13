@@ -1,0 +1,49 @@
+#####################################################################################
+################     Overview Commands                     ##########################
+#####################################################################################
+
+#Starten eines neuen Docker Containers
+	docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+#Starten eines Docker Containers
+	docker start CONTAINER|CONTAINERID
+
+# Auflistung aller laufenden/gestarteten Container
+	docker ps	
+
+# Auflistung aller gestarteten sowie nicht gestarteten Container
+	docker ps –-all
+
+# Anzeigen Low Level Informationen zu einem Container im JSON Format
+	docker inspect [OPTIONS] CONTAINER|IMAGE [CONTAINER|IMAGE...]
+
+#Kill eines laufenden Containers
+	docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+# Stoppen eines laufenden Docker Containers - ist der Kill Option vorzuziehen
+	 docker stop [OPTIONS] CONTAINER [CONTAINER...]
+
+# Erzeugen eines neuen Images mit den gemachten Änderungen am Container
+	docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+
+# Löschen eines angehaltenen Containers
+	docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+# Löschen eines Images
+	docker rmi [OPTIONS] IMAGE [IMAGE...]
+
+# Example Starten Nginx
+docker run --publish 4080:80 --detach --name nginx-01 nginx
+
+# Docker Build
+docker build -t <repository name>/hello:1.0 .
+
+# Login Registry/Repository
+docker login
+
+# Docker Taggen
+docker tag nginx <repository name>/mynginx:1.0
+
+# Docker Commit einer Änderung am Image
+docker commit <container name> <new image name>
+
