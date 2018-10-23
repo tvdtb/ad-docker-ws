@@ -21,11 +21,11 @@ Der Build wird im Projekt-Verzeichnis mit folgendem Kommando ausgelöst:
 pushd spring-boot-docker
 docker run --rm -ti                                      \
            -v $(pwd):/opt/spring-boot-docker             \
-		   -v /root/.m2:/root/.m2                        \
-		   -w /opt/spring-boot-docker                    \
-		   --privileged -v /var/run/docker.sock:/var/run/docker.sock    \
-		   builder-11                                    \
-		   mvn install -Pdocker -Ddocker.verbose=true
+           -v /root/.m2:/root/.m2                        \
+           -w /opt/spring-boot-docker                    \
+           --privileged -v /var/run/docker.sock:/var/run/docker.sock    \
+           builder-11                                    \
+           mvn install -Pdocker -Ddocker.verbose=true
 ```
 
 Zum Starten wird das erstellte Image mit folgendem Kommando instanziiert:
