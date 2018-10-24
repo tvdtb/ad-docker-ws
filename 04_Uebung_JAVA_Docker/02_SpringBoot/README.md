@@ -24,8 +24,9 @@ docker run --rm -ti                                      \
            -v /root/.m2:/root/.m2                        \
            -w /opt/spring-boot-docker                    \
            --privileged -v /var/run/docker.sock:/var/run/docker.sock    \
-           builder-11                                    \
+           builder:11                                    \
            mvn install -Pdocker -Ddocker.verbose=true
+popd
 ```
 
 Zum Starten wird das erstellte Image mit folgendem Kommando instanziiert:
