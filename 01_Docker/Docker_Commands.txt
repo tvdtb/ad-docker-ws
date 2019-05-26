@@ -12,7 +12,7 @@
 	docker ps	
 
 # Auflistung aller gestarteten sowie nicht gestarteten Container
-	docker ps –-all
+	docker ps --all
 
 # Anzeigen Low Level Informationen zu einem Container im JSON Format
 	docker inspect [OPTIONS] CONTAINER|IMAGE [CONTAINER|IMAGE...]

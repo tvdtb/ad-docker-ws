@@ -7,7 +7,9 @@ Anforderungen:
 - Docker
 
 
-Da der eigentliche Build in docker stattfindet, wird zuerst ein Builder gebaut, der zusätzlich zu maven und jdk 11 auch Docker enthält.
+Der eigentliche Build findet in Docker statt, dazu wird kein Docker im Builder 
+benötigt da das maven-Plugin nur den Socket /var/run/docker.sock benötigt.
+Es kann aber sinnvoll sin, ein Image mit Docker-CLI zu installieren
 
 ```bash
 pushd builder
@@ -19,12 +21,10 @@ Der Build wird im Projekt-Verzeichnis mit folgendem Kommando ausgelöst:
 
 ```bash
 pushd spring-boot-docker
-docker run --rm -ti                                      \
-           -v $(pwd):/opt/spring-boot-docker             \
-           -v /root/.m2:/root/.m2                        \
-           -w /opt/spring-boot-docker                    \
-           --privileged -v /var/run/docker.sock:/var/run/docker.sock    \
-           builder:11                                    \
+docker run --rm -ti -v ${PWD}:${PWD} -w ${PWD}           \
+           -v /tmp/.m2:/root/.m2                         \
+           -v /var/run/docker.sock:/var/run/docker.sock  \
+           maven:3.5.4-jdk-11                            \
            mvn install -Pdocker -Ddocker.verbose=true
 popd
 ```

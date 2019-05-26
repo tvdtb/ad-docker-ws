@@ -1,5 +1,5 @@
 FROM nginx:latest
-MAINTAINER Christian Haefner <christian.haefner@trivadis.com>
+MAINTAINER Trivadis
 
 COPY index.html /usr/share/nginx/html
 

@@ -2,10 +2,10 @@ version: '3.2'
 networks:
   wordpress:
     ipam:
-      driver: default  
+      driver: default 
 services:
   wordpress:
-    image: wordpress
+    image: wordpress:5.2.1
     restart: "unless-stopped"
     networks:
       - wordpress
@@ -15,12 +15,11 @@ services:
       - 8080:80
     environment:
       WORDPRESS_DB_PASSWORD: example
-      
   mysql:
-    image: mysql:5.6
+    image: mysql:5.7
     restart: "unless-stopped"
     networks:
       - wordpress    
     environment:
-      MYSQL_ROOT_PASSWORD: example      
+      MYSQL_ROOT_PASSWORD: example   
 
