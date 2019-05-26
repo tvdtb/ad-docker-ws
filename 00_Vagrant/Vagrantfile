@@ -1,0 +1,42 @@
+Vagrant.configure("2") do |config|
+  if ENV['PROXY_ENABLE'] == 'true'
+    # nutze vagrant-procyconf für entsprechende Einträge in /etc/environment und /etc/profile.d/proxy.sh
+    # zu finden mit: sudo grep -nri _proxy= /etc
+    
+    if Vagrant.has_plugin?("vagrant-proxyconf")
+      config.proxy.http     = "http://proxy:8080/"
+      config.proxy.https    = "http://proxy:8080/"
+      config.proxy.no_proxy = "localhost,127.0.0.1,.test"
+    end
+  end
+
+  # https://app.vagrantup.com/centos/boxes/7
+  config.vm.box = "centos/7"
+  config.vm.box_version = "1902.01"
+
+  # Network
+  config.vm.hostname = "ad-docker-ws"
+  config.vm.network "private_network", ip: "192.168.88.3"
+    
+  # Copy SSH Keys
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "/home/vagrant/ssh/id_rsa.pub"
+  config.vm.provision "file", source: "~/.ssh/id_rsa"    , destination: "/home/vagrant/ssh/id_rsa"
+
+  config.vm.provision :shell, path: "provision-user.sh"
+  config.vm.provision :shell, path: "provision-docker.sh"
+  config.vm.provision :shell, path: "provision-samba.sh"
+  config.vm.provision :shell, path: "provision-project.sh"
+  config.vm.provision :shell, path: "provision-dns-docker.sh"
+  config.vm.provision :shell, path: "provision-nosecurity.sh"
+  config.vm.provision :shell, path: "provision-permissions.sh"
+  
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "ad-docker-ws"
+    v.memory = 4096
+    v.cpus = 4
+  end
+
+
+end
+
