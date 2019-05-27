@@ -5,6 +5,9 @@ echo PROVISIONIERE DOCKER ------------------------------------------------------
 DOCKER_VERSION=18.09.6
 DOCKERCOMPOSE_VERSION=1.24.0
 DOCKERCOMPOSE_PATH=/usr/local/bin/docker-compose
+DOCKERDISTRIBUTION_VERSION=2.6.2
+
+
 
 # https://docs.docker.com/install/linux/docker-ce/centos/
 PACKAGES="yum-utils device-mapper-persistent-data lvm2"
@@ -39,3 +42,16 @@ else
   echo Docker Compose ${DOCKERCOMPOSE_VERSION} bereits installiert
 fi
 
+
+if ! rpm -q docker-distribution > /dev/null ; then
+  yum install -y docker-distribution-${DOCKERDISTRIBUTION_VERSION}
+fi
+
+if [ ! -f /etc/docker/daemon.json ] ; then
+  mkdir -p /etc/docker
+  echo "{}" > /etc/docker/daemon.json
+fi
+
+if ! grep -qn "localhost:50000" /etc/docker/daemon.json ; then
+  cat <<< $(/usr/local/bin/jq '. + { "insecure-registries": ["localhost:5000"] }' /etc/docker/daemon.json)   > /etc/docker/daemon.json
+fi

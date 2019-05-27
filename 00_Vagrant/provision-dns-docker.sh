@@ -16,13 +16,18 @@ EOF
 fi
 
 if [ -d /etc/docker ] ; then 
+  if [ ! -f /etc/docker/daemon.json ] ; then
+    echo "{}" > /etc/docker/daemon.json
+  fi
+
   if ! grep -qn "192.168.88.3" /etc/docker/daemon.json ; then
 
-  cat > /etc/docker/daemon.json << EOF
-{
-    "dns": ["192.168.88.3"]
-}
-EOF
-
+    if ! grep -q "192.168.88.3" /etc/docker/daemon.json ; then
+      cat <<< $(/usr/local/bin/jq '. + { "dns": ["192.168.88.3"] }' /etc/docker/daemon.json)   > /etc/docker/daemon.json
+    fi
   fi
 fi
+
+
+
+

@@ -14,6 +14,9 @@ fi
 PACKAGES="acl git"
 if ! rpm -q ${PACKAGES} > /dev/null ; then
   yum install -y ${PACKAGES}
+  
+  git config --global pull.rebase true
+  git config --global core.autocrlf false
 fi
 
 if [ ! -d ${PROJECTS}/${PROJECT}/.git ] ; then
