@@ -1,0 +1,16 @@
+# docker-compose up -d --scale kubia=3
+# docker run --network scaling_scale --rm -ti centos:7 sh -c "for i in {1..5}; do curl -sS kubia:8080; sleep 1; done"
+
+
+version: '3.7'
+networks:
+  scale:
+services:
+  kubia:
+    image: luksa/kubia:v1
+    restart: "unless-stopped"
+    networks:
+      - scale
+    ports:
+      - 8080-8090:80
+
