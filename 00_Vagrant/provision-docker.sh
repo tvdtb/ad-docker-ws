@@ -7,8 +7,6 @@ DOCKERCOMPOSE_VERSION=1.24.0
 DOCKERCOMPOSE_PATH=/usr/local/bin/docker-compose
 DOCKERDISTRIBUTION_VERSION=2.6.2
 
-
-
 # https://docs.docker.com/install/linux/docker-ce/centos/
 PACKAGES="yum-utils device-mapper-persistent-data lvm2"
 if ! rpm -q ${PACKAGES} > /dev/null ; then 

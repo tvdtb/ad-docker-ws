@@ -1,0 +1,21 @@
+machine:
+  hostname: ad-docker-ws
+  domain: test
+  ip: 192.168.88.3
+  host-ip: 192.168.88.1
+  memory: 4096
+  cpus: 4
+
+# Für den Proxy wird das Plugin vagrant-proxyconf benötigt
+proxy:
+  # wenn das flag verändert wird, muss vagrant up --provision ausgefuehrt werden
+  enabled: false
+  http: http://proxy:80
+  https: http://proxy:80
+  noproxy: localhost,127.0.0.1,.test
+  
+  
+projects:
+  - name: ad-docker-ws
+    repository: "https://github.com/tvdtb/ad-docker-ws"
+  

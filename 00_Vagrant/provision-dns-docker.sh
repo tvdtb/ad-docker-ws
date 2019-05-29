@@ -1,4 +1,9 @@
 echo PROVISIONIERE DNS ----------------------------------------------------------------------
+HOSTNAME=$1
+IP=$2
+HOSTIP=$3
+DOMAIN=$4
+echo HOSTNAME=${HOSTNAME} IP=${IP} HOSTIP=${HOSTIP} DOMAIN=${DOMAIN}
 
 if ! rpm -q dnsmasq > /dev/null ; then
   yum install -y dnsmasq
@@ -10,8 +15,8 @@ fi
 
 if ! grep -qn "ad-docker-ws.test" /etc/hosts ; then
 cat >> /etc/hosts << EOF
-192.168.88.3          ad-docker-ws  ad-docker-ws.test
-192.168.88.1                  host          host.test
+${IP}                 ${HOSTNAME}  ${HOSTNAME}.${DOMAIN}
+${HOSTIP}                   host        host.${DOMAIN}
 EOF
 fi
 
@@ -20,10 +25,10 @@ if [ -d /etc/docker ] ; then
     echo "{}" > /etc/docker/daemon.json
   fi
 
-  if ! grep -qn "192.168.88.3" /etc/docker/daemon.json ; then
+  if ! grep -qn "${IP}" /etc/docker/daemon.json ; then
 
-    if ! grep -q "192.168.88.3" /etc/docker/daemon.json ; then
-      cat <<< $(/usr/local/bin/jq '. + { "dns": ["192.168.88.3"] }' /etc/docker/daemon.json)   > /etc/docker/daemon.json
+    if ! grep -q "${IP}" /etc/docker/daemon.json ; then
+      cat <<< $(/usr/local/bin/jq '. + { "dns": ["'${IP}'"] }' /etc/docker/daemon.json)   > /etc/docker/daemon.json
     fi
   fi
 fi

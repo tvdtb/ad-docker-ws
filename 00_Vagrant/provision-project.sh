@@ -1,7 +1,7 @@
-echo PROVISIONIERE PROJEKT ------------------------------------------------------------------------
+echo PROVISIONIERE PROJEKT $1 ---------------------------------------------------------------
 
-REPOSITORY=https://github.com/tvdtb/ad-docker-ws
-PROJECT=ad-docker-ws
+PROJECT=$1
+REPOSITORY=$2
 PROJECTS=/opt/projects
 
 # Projektverzeichnis anlegen
