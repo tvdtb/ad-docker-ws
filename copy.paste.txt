@@ -1,3 +1,5 @@
+DEUTSCHLAND
+
 ! " § $ % & / ( ) = ? `
 1 2 3 4 5 6 7 8 9 0 ß ´
 
@@ -7,6 +9,23 @@ q w e r t z u i o p ü +
 
 A S D F G H J K L Ö Ä ' 
 a s d f g h j k l ö ä #
+
+Y X C V B N M ; : _
+y x c v b n m , . -
+
+
+SCHWEIZ
+
++ " * þ % & / ( ) = ? ` 
+1 2 3 4 5 6 7 8 9 0 ' ^
+ª @ #     ¼ | ó     + ~
+
+Q W E R T Z U I O P Þ !
+q w e r t z u i o p ³ ¿
+    Ç               [ ] 
+
+A S D F G H J K L Ú Ó ú
+                    { } 
 
 Y X C V B N M ; : _
 y x c v b n m , . -
