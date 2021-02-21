@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-svc
+spec:
+  selector:
+    name: kubia-dplmnt
+  ports:
+    - name: kubia-default
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  externalIPs:
+    - 10.10.10.101

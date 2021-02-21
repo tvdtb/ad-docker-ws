@@ -1,0 +1,24 @@
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/#deployment-v1-apps
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubia-dplmnt
+  labels:
+    name: kubia-dplmnt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: kubia-dplmnt
+  template:
+    metadata:
+      labels:
+        name: kubia-dplmnt
+    spec:
+      containers:
+        - name: kubia
+          image: luksa/kubia
+          ports:
+            - name: default-port
+              containerPort: 8080
+
